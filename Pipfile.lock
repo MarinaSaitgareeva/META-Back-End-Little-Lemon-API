@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a264c031e636d49472dacd5a96c3b507edfcd635ec27dc4d92c9a20149644a6e"
+            "sha256": "f0b6ef98dbb041d91ef1144e3d84837c2884993af934707da82835d9d02bd918"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -253,6 +253,14 @@
             "index": "pypi",
             "version": "==4.1.5"
         },
+        "django-filter": {
+            "hashes": [
+                "sha256:ed429e34760127e3520a67f415bec4c905d4649fbe45d0d6da37e6ff5e0287eb",
+                "sha256:ed473b76e84f7e83b2511bb2050c3efb36d135207d0128dfe3ae4b36e3594ba5"
+            ],
+            "index": "pypi",
+            "version": "==22.1"
+        },
         "django-templated-mail": {
             "hashes": [
                 "sha256:8db807effebb42a532622e2d142dfd453dafcd0d7794c4c3332acb90656315f9",
@@ -273,7 +281,7 @@
                 "sha256:153c973c5c154baf566be431de8527c2bd62557fde7373ebcb0f02b73b28e07a",
                 "sha256:6f09f97cb015265e85d1d02dc6bfc299c72c231eecbe261c5bee5c6b2867f2b4"
             ],
-            "markers": "python_version >= '3.7'",
+            "index": "pypi",
             "version": "==4.8.0"
         },
         "djangorestframework-xml": {
