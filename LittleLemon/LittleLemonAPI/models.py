@@ -18,15 +18,15 @@ class MenuItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     
     def __str__(self):
-        return self.title + " (" + self.category + ")"
+        return str(self.title) + " (" + str(self.category) + ")"
     
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity = models.SmallIntegerField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    # price = models.DecimalField(max_digits=6, decimal_places=2)
+    # subtotal = models.DecimalField(max_digits=6, decimal_places=2)
     
     class Meta:
         unique_together = ("menuitem", "user")
@@ -37,24 +37,30 @@ class Cart(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    delivery_crew = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="delivery_crew", null=True)
+    delivery_crew = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="delivery_crew",
+        null=True,
+        limit_choices_to={"groups__name": "Delivery Crew"}
+    )
     status = models.BooleanField(db_index=True, default=0)
     total = models.DecimalField(max_digits=6, decimal_places=2)
     date = models.DateField(db_index=True)
     
     def __str__(self):
-        return self.user + " (" + str(self.id) + ")"
+        return str(self.user) + " (Order# " + str(self.id) + ")"
 
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity = models.SmallIntegerField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    # unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    # price = models.DecimalField(max_digits=6, decimal_places=2)
     
     class Meta:
         unique_together = ("order", "menuitem")
         
     def __str__(self):
-        return self.order
+        return str(self.order) + " - " + str(self.menuitem)
