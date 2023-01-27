@@ -115,7 +115,16 @@ class CartItemView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Cart.objects.filter(user=self.request.user, pk=self.kwargs["pk"])
+        return Cart.objects.filter(user=self.request.user)
+    
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        # make sure to catch 404's below
+        menuitem = MenuItem.objects.get(pk=self.kwargs["pk"])
+        menuitem_id = menuitem.pk
+        obj = queryset.get(menuitem=menuitem_id)
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 class OrdersView(generics.ListCreateAPIView):
