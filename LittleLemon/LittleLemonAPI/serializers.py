@@ -50,26 +50,21 @@ class OrderSerializer(serializers.ModelSerializer):
         read_only_fields = ["user", "total", "date"]
         
 
-class OrderPostSerializer(serializers.ModelSerializer):
-    class Meta():
-        model = Order
-        read_only_fields = "__all__" 
-        
-
 class OrderItemSerializer(serializers.ModelSerializer):
     menuitem = serializers.StringRelatedField()
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source="menuitem.price", read_only=True)
     subtotal = serializers.SerializerMethodField()
+    status = serializers.StringRelatedField(source="order.status")
+    delivery_crew = serializers.StringRelatedField(source="order.delivery_crew")
     
     class Meta:
         model = OrderItem
-        fields = ["id", "order", "menuitem_id", "menuitem", "quantity", "price", "subtotal"]
+        fields = ["id", "order", "menuitem_id", "menuitem", "quantity", "price", "subtotal", "status", "delivery_crew"]
         read_only_fields = ["order", "menuitem_id", "menuitem", "total", "price", "subtotal"]
         
     def get_subtotal(self, order:OrderItem):
         subtotal = round(order.menuitem.price * order.quantity, 2)
         return f"{subtotal:.2f}"
-
 
 class UserSerializer(serializers.ModelSerializer):    
     class Meta:
