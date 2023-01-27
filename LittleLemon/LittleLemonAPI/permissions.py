@@ -36,7 +36,7 @@ class ReadOnly(BasePermission):
 class IsCustomer(BasePermission):
     def has_permission(self, request, view):
         # The IsAdminUser permission class will deny permission to any user, unless user.is_staff is True in which case permission will be allowed
-        return request.user.is_authenticated and (not IsAdminUser)
+        return request.user.is_authenticated and (not request.user.is_staff)
         # user, not belonging to any group = Customer
         # return request.user.is_authenticated and self.request.user.groups.count() == 0
 
@@ -44,7 +44,7 @@ class IsCustomer(BasePermission):
 class IsCustomerAndOwner(BasePermission):
     def has_permission(self, request, view):
         # The IsAdminUser permission class will deny permission to any user, unless user.is_staff is True in which case permission will be allowed
-        return request.user.is_authenticated and (not IsAdminUser)
+        return request.user.is_authenticated and (not request.user.is_staff)
         # user, not belonging to any group = Customer
         # return request.user.is_authenticated and self.request.user.groups.count() == 0
         
