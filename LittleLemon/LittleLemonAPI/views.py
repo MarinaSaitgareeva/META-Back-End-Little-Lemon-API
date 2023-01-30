@@ -151,7 +151,7 @@ class OrdersView(generics.ListCreateAPIView):
             total = 0
 
             order = Order.objects.create(
-                user=request.user, status=False, total=total, date=date.today()
+                user=request.user, status=False, total=total, date=date.today
             )
 
             for cart_item in cart.values():
