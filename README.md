@@ -122,10 +122,10 @@ POST http://127.0.0.1:8000/auth/token/login/
 | /api/menu-items/{menuItem} | Customer, delivery crew | GET                      | Lists single menu item                                        |
 | /api/menu-items/{menuItem} | Customer, delivery crew | POST, PUT, PATCH, DELETE | Returns 403 - Unauthorized                                    |
 | /api/menu-items            | Manager                 | GET                      | Lists all menu items. Return a 200 – Ok HTTP status code      |
-| /api/menu-items            | Customer, delivery crew | POST                     | Creates a new menu item and returns 201 - Created             |
-| /api/menu-items/{menuItem} | Customer, delivery crew | GET                      | Lists single menu item                                        |
-| /api/menu-items/{menuItem} | Customer, delivery crew | PUT, PATCH               | Updates single menu item                                      |
-| /api/menu-items/{menuItem} | Customer, delivery crew | DELETE                   | Deletes menu item                                             |
+| /api/menu-items            | Manager                 | POST                     | Creates a new menu item and returns 201 - Created             |
+| /api/menu-items/{menuItem} | Manager                 | GET                      | Lists single menu item                                        |
+| /api/menu-items/{menuItem} | Manager                 | PUT, PATCH               | Updates single menu item                                      |
+| /api/menu-items/{menuItem} | Manager                 | DELETE                   | Deletes menu item                                             |
 
 #### User group management endpoints
 
